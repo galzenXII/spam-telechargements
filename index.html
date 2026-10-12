@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Spam — Télécharger</title>
+  <meta name="description" content="Spam : mets le bazar dans vos soirées en vocal. Mèmes sur l'écran des potes, radio partagée, soundbox et quiz.">
+  <link rel="icon" href="icon.png">
+  <style>
+    :root {
+      --bg: #0e0e14;
+      --panel: #17171f;
+      --panel-2: #20202b;
+      --border: #2c2c3a;
+      --text: #ececf3;
+      --muted: #9a9ab0;
+      --accent: #7c5cff;
+      --accent-2: #c45cff;
+      --green: #3ddc84;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(900px 500px at 50% -10%, rgba(124, 92, 255, 0.25), transparent 70%),
+        var(--bg);
+      color: var(--text);
+      font: 16px/1.6 -apple-system, "Segoe UI", system-ui, sans-serif;
+    }
+    a { color: inherit; }
+    .wrap { max-width: 1040px; margin: 0 auto; padding: 0 20px; }
+
+    header { display: flex; align-items: center; gap: 10px; padding: 22px 0; font-weight: 800; font-size: 20px; }
+    header img { width: 34px; height: 34px; }
+
+    .hero { text-align: center; padding: 40px 0 56px; }
+    .hero .icon { width: 132px; height: 132px; filter: drop-shadow(0 18px 40px rgba(124, 92, 255, 0.45)); }
+    .hero h1 { margin: 16px 0 6px; font-size: clamp(40px, 8vw, 72px); line-height: 1.05; letter-spacing: -0.02em; }
+    .hero p.tagline { margin: 0 auto 30px; max-width: 560px; color: var(--muted); font-size: 19px; }
+
+    .downloads { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
+    .dl {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 26px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: var(--panel-2);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 17px;
+      transition: transform 0.1s, border-color 0.15s;
+    }
+    .dl:hover { transform: translateY(-2px); border-color: var(--accent); }
+    .dl .os { font-size: 26px; }
+    .dl small { display: block; color: var(--muted); font-weight: 500; font-size: 13px; }
+    .dl.primary {
+      border: none;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow: 0 14px 40px rgba(124, 92, 255, 0.4);
+    }
+    .dl.primary small { color: rgba(255, 255, 255, 0.8); }
+    .meta { margin-top: 18px; color: var(--muted); font-size: 14px; }
+    .notice { margin: 18px auto 0; max-width: 520px; color: var(--muted); font-size: 14px; }
+
+    section { padding: 40px 0; }
+    h2 { margin: 0 0 22px; font-size: 28px; text-align: center; }
+
+    .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+    .feature { padding: 22px; border: 1px solid var(--border); border-radius: 16px; background: var(--panel); }
+    .feature .emoji { font-size: 32px; }
+    .feature h3 { margin: 8px 0 6px; font-size: 19px; }
+    .feature p { margin: 0; color: var(--muted); font-size: 15px; }
+
+    .tabs { display: flex; justify-content: center; gap: 6px; margin-bottom: 18px; }
+    .tab {
+      padding: 9px 18px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: var(--panel);
+      color: var(--muted);
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .tab.active { border-color: var(--accent); color: var(--text); background: var(--panel-2); }
+    .steps { max-width: 640px; margin: 0 auto; padding: 0; list-style: none; counter-reset: step; }
+    .steps li {
+      position: relative;
+      margin-bottom: 12px;
+      padding: 16px 18px 16px 62px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: var(--panel);
+      counter-increment: step;
+    }
+    .steps li::before {
+      content: counter(step);
+      position: absolute;
+      left: 16px;
+      top: 14px;
+      width: 32px;
+      height: 32px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      font-weight: 800;
+    }
+    .steps b { color: #fff; }
+    code {
+      display: inline-block;
+      margin-top: 6px;
+      padding: 6px 10px;
+      border-radius: 8px;
+      background: #0a0a0f;
+      color: #c9b8ff;
+      font: 14px ui-monospace, Menlo, Consolas, monospace;
+      overflow-wrap: anywhere;
+    }
+    [hidden] { display: none !important; }
+
+    footer { padding: 40px 0 50px; color: var(--muted); font-size: 14px; text-align: center; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header><img src="logo.png" alt=""> Spam</header>
+
+    <div class="hero">
+      <img class="icon" src="icon.png" alt="Logo de Spam : un ours">
+      <h1>Spam</h1>
+      <p class="tagline">Mets le bazar dans vos soirées en vocal : mèmes sur l'écran des potes, radio partagée, soundbox et quiz.</p>
+
+      <div class="downloads">
+        <a class="dl" id="dl-mac" href="https://github.com/galzenXII/spam-telechargements/releases/latest">
+          <span class="os">🍎</span><span>Télécharger pour Mac<small id="mac-info">Apple Silicon et Intel</small></span>
+        </a>
+        <a class="dl" id="dl-win" href="https://github.com/galzenXII/spam-telechargements/releases/latest">
+          <span class="os">🪟</span><span>Télécharger pour Windows<small id="win-info">Windows 10 et 11, 64 bits</small></span>
+        </a>
+      </div>
+      <div class="meta" id="version">Gratuit · Mac et Windows</div>
+      <p class="notice" id="mobile-note" hidden>📱 Spam s'installe sur un <b>ordinateur</b> : ouvre cette page sur ton Mac ou ton PC.</p>
+    </div>
+
+    <section>
+      <h2>Ce que fait Spam</h2>
+      <div class="features">
+        <div class="feature">
+          <div class="emoji">🎨</div>
+          <h3>Studio</h3>
+          <p>Envoie images, GIF et vidéos sur l'écran des potes : texte, découpage, son, vitesse, emplacement… Une bibliothèque garde tout.</p>
+        </div>
+        <div class="feature">
+          <div class="emoji">📻</div>
+          <h3>Radio</h3>
+          <p>Écoutez YouTube ensemble, synchronisé à la seconde. Chacun propose, tout le monde vote pour le prochain son.</p>
+        </div>
+        <div class="feature">
+          <div class="emoji">🔊</div>
+          <h3>Soundbox</h3>
+          <p>Tes sons et ceux du salon, à déclencher chez tout le monde d'un clic sur le grand bouton.</p>
+        </div>
+        <div class="feature">
+          <div class="emoji">🎮</div>
+          <h3>Jeux</h3>
+          <p>QCM façon « Questions pour un champion » et Enchère arbitrée par une IA, en overlay sur l'écran des joueurs.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Installer Spam</h2>
+      <div class="tabs">
+        <button class="tab" data-os="mac">🍎 Mac</button>
+        <button class="tab" data-os="win">🪟 Windows</button>
+      </div>
+
+      <ol class="steps" data-steps="mac">
+        <li>Ouvre le fichier <b>.dmg</b> téléchargé et <b>glisse Spam dans le dossier Applications</b>.</li>
+        <li>Lance Spam. La première fois, macOS refuse de l'ouvrir : l'appli n'est pas signée par Apple, c'est normal pour une appli entre potes.</li>
+        <li>Va dans <b>Réglages Système → Confidentialité et sécurité</b>, descends en bas et clique sur <b>« Ouvrir quand même »</b>.</li>
+        <li>Si macOS dit que l'appli est <b>« endommagée »</b>, ouvre le <b>Terminal</b>, tape cette ligne puis relance Spam :<br><code>xattr -cr /Applications/Spam.app</code></li>
+      </ol>
+
+      <ol class="steps" data-steps="win" hidden>
+        <li>Double-clique sur le fichier <b>.exe</b> téléchargé : Spam s'installe tout seul, avec un raccourci sur le bureau.</li>
+        <li>Si Windows affiche <b>« Windows a protégé votre ordinateur »</b>, clique sur <b>« Informations complémentaires »</b> puis <b>« Exécuter quand même »</b>.</li>
+        <li>Si ton antivirus se méfie, autorise Spam : l'appli n'est pas signée, c'est pour ça.</li>
+        <li>Ensuite, Spam <b>se met à jour tout seul</b> : un bouton vert « Redémarrer » apparaît quand une nouvelle version est prête.</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>Premier lancement</h2>
+      <ol class="steps">
+        <li>Choisis ton <b>pseudo</b>.</li>
+        <li>Entre <b>le code du salon</b> que t'a donné l'organisateur : tout le monde doit avoir exactement le même.</li>
+        <li>Ajoute ta photo de profil dans <b>⚙ Réglages</b>, et c'est parti. <b>Échap</b> ferme tout ce qui s'affiche sur ton écran.</li>
+      </ol>
+    </section>
+
+    <footer>Fait entre potes 🐻 · <a href="https://github.com/galzenXII/spam-telechargements/releases">Toutes les versions</a></footer>
+  </div>
+
+  <script>
+    // Ordi du visiteur : son bouton passe en premier et en couleur, avec les bonnes étapes
+    const ua = navigator.userAgent;
+    const os = /Windows/i.test(ua) ? 'win' : /Mac/i.test(ua) && !/iPhone|iPad/i.test(ua) ? 'mac' : /Android|iPhone|iPad/i.test(ua) ? 'mobile' : 'mac';
+    const mac = document.getElementById('dl-mac');
+    const win = document.getElementById('dl-win');
+    if (os === 'win') {
+      win.classList.add('primary');
+      win.parentNode.prepend(win);
+    } else if (os === 'mac') {
+      mac.classList.add('primary');
+    } else {
+      document.getElementById('mobile-note').hidden = false;
+    }
+
+    function showSteps(which) {
+      document.querySelectorAll('.tab').forEach((t) => t.classList.toggle('active', t.dataset.os === which));
+      document.querySelectorAll('[data-steps="mac"], [data-steps="win"]').forEach((l) => (l.hidden = l.dataset.steps !== which));
+    }
+    document.querySelectorAll('.tab').forEach((t) => t.addEventListener('click', () => showSteps(t.dataset.os)));
+    showSteps(os === 'win' ? 'win' : 'mac');
+
+    // Les boutons pointent toujours vers la dernière version publiée
+    fetch('https://api.github.com/repos/galzenXII/spam-telechargements/releases/latest')
+      .then((r) => (r.ok ? r.json() : Promise.reject()))
+      .then((release) => {
+        const mo = (n) => `${Math.round(n / 1048576)} Mo`;
+        const find = (end) => release.assets.find((a) => a.name.endsWith(end));
+        const dmg = find('-Mac.dmg');
+        const exe = find('-Windows.exe');
+        if (dmg) {
+          mac.href = dmg.browser_download_url;
+          document.getElementById('mac-info').textContent = `Apple Silicon et Intel · ${mo(dmg.size)}`;
+        }
+        if (exe) {
+          win.href = exe.browser_download_url;
+          document.getElementById('win-info').textContent = `Windows 10 et 11 · ${mo(exe.size)}`;
+        }
+        const version = String(release.tag_name).replace(/^v/, '');
+        document.getElementById('version').textContent = `Version ${version} · Gratuit · Mac et Windows`;
+      })
+      .catch(() => {});
+  </script>
+</body>
+</html>

@@ -4,6 +4,8 @@ L'appli pour mettre le bazar pendant vos soirées en vocal : envoyer des mèmes,
 
 ## ⬇️ Télécharger
 
+👉 **[La page de téléchargement](https://galzenxii.github.io/spam-telechargements/)** (le plus simple), ou :
+
 Va dans **[Releases](../../releases/latest)** et prends le fichier qui correspond à ton ordi :
 
 | Ordi | Fichier |
