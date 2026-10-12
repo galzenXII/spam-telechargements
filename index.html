@@ -62,6 +62,8 @@
     }
     .dl.primary small { color: rgba(255, 255, 255, 0.8); }
     .meta { margin-top: 18px; color: var(--muted); font-size: 14px; }
+    .linux-dl { margin: 0 auto 18px; }
+    .linux-dl .dl { padding: 12px 18px; font-size: 15px; }
     .notice { margin: 18px auto 0; max-width: 520px; color: var(--muted); font-size: 14px; }
 
     section { padding: 40px 0; }
@@ -140,8 +142,11 @@
         <a class="dl" id="dl-win" href="https://github.com/galzenXII/spam-telechargements/releases/latest">
           <span class="os">🪟</span><span>Télécharger pour Windows<small id="win-info">Windows 10 et 11, 64 bits</small></span>
         </a>
+        <a class="dl" id="dl-linux" href="#installer" data-goto="linux">
+          <span class="os">🐧</span><span>Télécharger pour Linux<small>Fedora, Arch, AppImage</small></span>
+        </a>
       </div>
-      <div class="meta" id="version">Gratuit · Mac et Windows</div>
+      <div class="meta" id="version">Gratuit · Mac, Windows et Linux</div>
       <p class="notice" id="mobile-note" hidden>📱 Spam s'installe sur un <b>ordinateur</b> : ouvre cette page sur ton Mac ou ton PC.</p>
     </div>
 
@@ -171,11 +176,12 @@
       </div>
     </section>
 
-    <section>
+    <section id="installer">
       <h2>Installer Spam</h2>
       <div class="tabs">
         <button class="tab" data-os="mac">🍎 Mac</button>
         <button class="tab" data-os="win">🪟 Windows</button>
+        <button class="tab" data-os="linux">🐧 Linux</button>
       </div>
 
       <ol class="steps" data-steps="mac">
@@ -191,6 +197,20 @@
         <li>Si ton antivirus se méfie, autorise Spam : l'appli n'est pas signée, c'est pour ça.</li>
         <li>Ensuite, Spam <b>se met à jour tout seul</b> : un bouton vert « Redémarrer » apparaît quand une nouvelle version est prête.</li>
       </ol>
+
+      <div data-steps="linux" hidden>
+        <div class="downloads linux-dl">
+          <a class="dl" id="dl-rpm" href="https://github.com/galzenXII/spam-telechargements/releases/latest"><span class="os">🎩</span><span>Fedora<small>fichier .rpm</small></span></a>
+          <a class="dl" id="dl-arch" href="https://github.com/galzenXII/spam-telechargements/releases/latest"><span class="os">🏔</span><span>Arch Linux<small>paquet .pacman</small></span></a>
+          <a class="dl" id="dl-appimage" href="https://github.com/galzenXII/spam-telechargements/releases/latest"><span class="os">📦</span><span>AppImage<small>tous les Linux · mises à jour auto</small></span></a>
+        </div>
+        <ol class="steps">
+          <li><b>Fedora</b> : télécharge le <b>.rpm</b>, puis dans un terminal (dans le dossier Téléchargements) :<br><code id="cmd-rpm">sudo dnf install ./Spam-…-Linux.rpm</code><br>Spam apparaît ensuite dans le menu des applications.</li>
+          <li><b>Arch Linux</b> : télécharge le <b>.pacman</b>, puis :<br><code id="cmd-arch">sudo pacman -U Spam-…-Linux-Arch.pacman</code></li>
+          <li><b>N'importe quel Linux</b> : télécharge l'<b>AppImage</b>, rends-la exécutable puis lance-la (c'est la seule version Linux qui <b>se met à jour toute seule</b>) :<br><code id="cmd-appimage">chmod +x Spam-…-Linux.AppImage &amp;&amp; ./Spam-…-Linux.AppImage</code><br>Si elle refuse de démarrer, installe FUSE : <code>sudo dnf install fuse-libs</code> (Fedora) ou <code>sudo pacman -S fuse2</code> (Arch).</li>
+          <li><b>Wayland</b> (Fedora par défaut) : Spam passe tout seul en mode compatible (XWayland) pour que les mèmes s'affichent par-dessus tes fenêtres. Si ça coince, préviens l'organisateur.</li>
+        </ol>
+      </div>
     </section>
 
     <section>
@@ -208,12 +228,22 @@
   <script>
     // Ordi du visiteur : son bouton passe en premier et en couleur, avec les bonnes étapes
     const ua = navigator.userAgent;
-    const os = /Windows/i.test(ua) ? 'win' : /Mac/i.test(ua) && !/iPhone|iPad/i.test(ua) ? 'mac' : /Android|iPhone|iPad/i.test(ua) ? 'mobile' : 'mac';
+    const os = /Windows/i.test(ua)
+      ? 'win'
+      : /Android|iPhone|iPad/i.test(ua)
+        ? 'mobile'
+        : /Linux|X11/i.test(ua)
+          ? 'linux'
+          : 'mac';
     const mac = document.getElementById('dl-mac');
     const win = document.getElementById('dl-win');
+    const linux = document.getElementById('dl-linux');
     if (os === 'win') {
       win.classList.add('primary');
       win.parentNode.prepend(win);
+    } else if (os === 'linux') {
+      linux.classList.add('primary');
+      linux.parentNode.prepend(linux);
     } else if (os === 'mac') {
       mac.classList.add('primary');
     } else {
@@ -222,10 +252,12 @@
 
     function showSteps(which) {
       document.querySelectorAll('.tab').forEach((t) => t.classList.toggle('active', t.dataset.os === which));
-      document.querySelectorAll('[data-steps="mac"], [data-steps="win"]').forEach((l) => (l.hidden = l.dataset.steps !== which));
+      document.querySelectorAll('[data-steps="mac"], [data-steps="win"], [data-steps="linux"]').forEach((l) => (l.hidden = l.dataset.steps !== which));
     }
     document.querySelectorAll('.tab').forEach((t) => t.addEventListener('click', () => showSteps(t.dataset.os)));
-    showSteps(os === 'win' ? 'win' : 'mac');
+    showSteps(os === 'win' || os === 'linux' ? os : 'mac');
+    // Le bouton Linux mène aux trois formats (Fedora, Arch, AppImage)
+    linux.addEventListener('click', () => showSteps('linux'));
 
     // Les boutons pointent toujours vers la dernière version publiée
     fetch('https://api.github.com/repos/galzenXII/spam-telechargements/releases/latest')
@@ -243,8 +275,16 @@
           win.href = exe.browser_download_url;
           document.getElementById('win-info').textContent = `Windows 10 et 11 · ${mo(exe.size)}`;
         }
+        const links = { 'dl-rpm': '-Linux.rpm', 'dl-arch': '-Linux-Arch.pacman', 'dl-appimage': '-Linux.AppImage' };
+        for (const [id, end] of Object.entries(links)) {
+          const asset = find(end);
+          if (asset) document.getElementById(id).href = asset.browser_download_url;
+        }
         const version = String(release.tag_name).replace(/^v/, '');
-        document.getElementById('version').textContent = `Version ${version} · Gratuit · Mac et Windows`;
+        document.getElementById('cmd-rpm').textContent = `sudo dnf install ./Spam-${version}-Linux.rpm`;
+        document.getElementById('cmd-arch').textContent = `sudo pacman -U Spam-${version}-Linux-Arch.pacman`;
+        document.getElementById('cmd-appimage').textContent = `chmod +x Spam-${version}-Linux.AppImage && ./Spam-${version}-Linux.AppImage`;
+        document.getElementById('version').textContent = `Version ${version} · Gratuit · Mac, Windows et Linux`;
       })
       .catch(() => {});
   </script>

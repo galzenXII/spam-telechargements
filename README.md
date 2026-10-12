@@ -12,6 +12,9 @@ Va dans **[Releases](../../releases/latest)** et prends le fichier qui correspon
 |---|---|
 | 🍎 Mac (Apple Silicon et Intel) | `Spam-…-Mac.dmg` |
 | 🪟 Windows (64 bits) | `Spam-…-Windows.exe` |
+| 🎩 Linux Fedora | `Spam-…-Linux.rpm` (`sudo dnf install ./Spam-…-Linux.rpm`) |
+| 🏔 Arch Linux | `Spam-…-Linux-Arch.pacman` (`sudo pacman -U Spam-…-Linux-Arch.pacman`) |
+| 🐧 Tous les Linux | `Spam-…-Linux.AppImage` (`chmod +x` puis lance-la ; se met à jour toute seule) |
 
 ## 🍎 Installer sur Mac
 
